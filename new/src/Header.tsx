@@ -1,25 +1,23 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 function Header() {
-    let [expanded, setExpanded] = useState(false);
-    let [toggled, setToggled] = useState(false);
+    // prevent flickering on first render
+    const [open, setOpen] = useState<null | boolean>(null);
 
-    const onClick = () => {
-        if (!toggled) {
-            setToggled(true);
-        }
+    const onClick = useCallback(() => {
+        setOpen(a=>!a);
+    }, []);
 
-        setExpanded(!expanded);
-    };
+    const listClass = open === null ? "" : (open ? ' header__links_opened' : ' header__links-toggled');
 
     return <header className="header">
         <a href="/" className="header__logo" aria-label="Яндекс.Дом"></a>
-        <button className="header__menu" aria-expanded={expanded ? 'true' : 'false'} onClick={onClick}>
+        <button className="header__menu" aria-expanded={open ? 'true' : 'false'} onClick={onClick}>
                 <span className="header__menu-text a11y-hidden">
-                    {expanded ? 'Закрыть меню' : 'Открыть меню'}
+                    {open ? 'Закрыть меню' : 'Открыть меню'}
                 </span>
         </button>
-        <ul className={'header__links' + (expanded ? ' header__links_opened' : '') + (toggled ? ' header__links-toggled' : '')}>
+        <ul className={'header__links' + listClass}>
             <li className="header__item">
                 <a className="header__link header__link_current" href="/" aria-current="page">Сводка</a>
             </li>

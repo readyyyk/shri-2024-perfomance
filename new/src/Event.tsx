@@ -1,17 +1,15 @@
-import {useRef, useEffect} from 'react';
+import { useRef, FC, memo } from 'react';
 
-function Event(props) {
-    const ref = useRef();
-
-    const { onSize } = props;
-
-    useEffect(() => {
-        const width = ref.current.offsetWidth;
-        const height = ref.current.offsetHeight;
-        if (onSize) {
-            onSize({ width, height });
-        }
-    });
+type Props = {
+    onSize?: (size: { width: number, height: number }) => void;
+    slim?: boolean;
+    icon: string;
+    iconLabel: string;
+    title: string;
+    subtitle?: string;
+}
+const Event: FC<Props> = (props) => {
+    const ref = useRef<HTMLLIElement>(null);
 
     return <li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
         <button className="event__button">
@@ -24,4 +22,5 @@ function Event(props) {
     </li>;
 }
 
-export default Event;
+const memoizedEvent = memo(Event);
+export default memoizedEvent;

@@ -8,7 +8,7 @@ const Devices: FC = () => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [hasRightScroll, setHasRightScroll] = useState(false);
-    const [scrolled, setScrolled] = useState(0);
+    // const [scrolled, setScrolled] = useState(0);
 
     useEffect(() => {
         const sumWidth = ref.current?.querySelector('div[aria-hidden="false"] ul')?.scrollWidth ?? -1;
@@ -28,11 +28,11 @@ const Devices: FC = () => {
             left: scroller.scrollLeft + 400,
             behavior: 'smooth'
         });
-        setScrolled(a => a+400);
+        // setScrolled(a => a+400);
     }, []);
 
-    const toShowCnt = Math.ceil(((ref.current?.clientWidth ?? window.innerWidth) + scrolled) / 215) + 10;
-    const activeEvents = TABS[activeTab as TabKey].items.slice(0, toShowCnt);
+    // const toShowCnt = Math.ceil(((ref.current?.clientWidth ?? window.innerWidth) + scrolled) / 215) + 10;
+    const activeEvents = TABS[activeTab as TabKey].items //.slice(0, toShowCnt);
 
     return (<section className="section main__devices">
         <DevicesTabSelect activeTab={activeTab} setActiveTab={setActiveTab}/>

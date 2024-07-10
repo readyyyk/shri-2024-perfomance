@@ -11,4 +11,7 @@ export default defineConfig({
     cssCodeSplit: true,
     minify: "terser",
   },
+  css: {
+    postcss: "./postcss.config.cjs"
+  }
 })

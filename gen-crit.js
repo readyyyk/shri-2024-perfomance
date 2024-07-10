@@ -8,8 +8,11 @@ const __dirname = path.dirname(__filename);
 
 generate({
     inline: true,
+    extract: true,
+
     base: path.join(__dirname, 'out/'),
     src: 'index.html',
+    css: ['out/_next/static/css/*'],
     target: {
         html: 'index.html',
     },

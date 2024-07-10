@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC } from 'react';
+import { type FC, memo } from 'react';
 import { TABS, TABS_KEYS } from '../data.ts';
 
 type Props = {
@@ -44,4 +44,4 @@ const DevicesTabSelect: FC<Props> = ({setActiveTab, activeTab}) => {
     </div>;
 };
 
-export default DevicesTabSelect;
+export default memo(DevicesTabSelect, (prev, next) => prev.activeTab === next.activeTab);

@@ -1,14 +1,13 @@
-import React from 'react'
 import { type FC, lazy, Suspense } from 'react';
 
-// const Header = lazy(()=>import('./Header.tsx'));
-import Header from './Header.tsx'
-// const Devices = lazy(()=>import('./sections/devices.tsx'));
-import Devices from './sections/devices.tsx'
-// const Scripts = lazy(()=>import('./sections/scripts.tsx'));
-import Scripts from './sections/scripts.tsx'
-// const General = lazy(()=>import('./sections/general.tsx'));
-import General from './sections/general.tsx'
+const Header = lazy(()=>import('./Header.tsx'));
+// import Header from './Header.tsx'
+const Devices = lazy(()=>import('./sections/devices.tsx'));
+// import Devices from './sections/devices.tsx'
+const Scripts = lazy(()=>import('./sections/scripts.tsx'));
+// import Scripts from './sections/scripts.tsx'
+const General = lazy(()=>import('./sections/general.tsx'));
+// import General from './sections/general.tsx'
 
 const App: FC = () => {
     return (<>

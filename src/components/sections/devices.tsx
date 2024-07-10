@@ -1,9 +1,8 @@
 'use client';
 
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
-import { TabKey, TABS } from '../data.ts';
-import Event from '../Event.tsx';
 import DevicesTabSelect from './devices.tab-select.tsx';
+import DevicesList from '@/components/sections/devices.list.tsx';
 
 const Devices: FC = () => {
     const [activeTab, setActiveTab] = useState<string>(
@@ -35,7 +34,7 @@ const Devices: FC = () => {
     }, []);
 
     // const toShowCnt = Math.ceil(((ref.current?.clientWidth ?? window.innerWidth) + scrolled) / 215) + 10;
-    const activeEvents = TABS[activeTab as TabKey].items //.slice(0, toShowCnt);
+
 
     return (<section className="section main__devices">
         <DevicesTabSelect activeTab={activeTab} setActiveTab={setActiveTab}/>
@@ -49,14 +48,7 @@ const Devices: FC = () => {
                 id={`panel_${activeTab}`}
                 aria-labelledby={`tab_${activeTab}`}
             >
-                <ul className="section__panel-list">
-                    {activeEvents.map((item, index) =>
-                        <Event
-                            key={index}
-                            {...item}
-                        />
-                    )}
-                </ul>
+                <DevicesList activeTab={activeTab} />
             </div>
             {hasRightScroll &&
                 <div className="section__arrow" onClick={onArrowCLick}></div>

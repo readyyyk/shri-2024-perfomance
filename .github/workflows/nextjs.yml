@@ -42,9 +42,6 @@ jobs:
       - name: Build my App
         run: pnpm run build
 
-      - name: Run PostBuild
-        run: pnpm run postbuild
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

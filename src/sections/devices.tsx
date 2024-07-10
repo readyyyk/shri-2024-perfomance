@@ -1,5 +1,5 @@
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
-import { TABS, TABS_KEYS } from '../data.ts';
+import { TabKey, TABS } from '../data.ts';
 import Event from '../Event.jsx';
 import DevicesTabSelect from './devices.tab-select.tsx';
 
@@ -8,6 +8,7 @@ const Devices: FC = () => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [hasRightScroll, setHasRightScroll] = useState(false);
+    const [scrolled, setScrolled] = useState(0);
 
     useEffect(() => {
         const sumWidth = ref.current?.querySelector('div[aria-hidden="false"] ul')?.scrollWidth ?? -1;
@@ -27,31 +28,33 @@ const Devices: FC = () => {
             left: scroller.scrollLeft + 400,
             behavior: 'smooth'
         });
+        setScrolled(a => a+400);
     }, []);
+
+    const toShowCnt = Math.ceil(((ref.current?.clientWidth ?? window.innerWidth) + scrolled) / 215) + 10;
+    const activeEvents = TABS[activeTab as TabKey].items.slice(0, toShowCnt);
 
     return (<section className="section main__devices">
         <DevicesTabSelect activeTab={activeTab} setActiveTab={setActiveTab}/>
 
         <div className="section__panel-wrapper" ref={ref}>
-            {TABS_KEYS.map(key =>
-                <div
-                    key={key}
-                    role="tabpanel"
-                    className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')}
-                    aria-hidden={key === activeTab ? 'false' : 'true'}
-                    id={`panel_${key}`}
-                    aria-labelledby={`tab_${key}`}
-                >
-                    <ul className="section__panel-list">
-                        {TABS[key].items.map((item, index) =>
-                            <Event
-                                key={index}
-                                {...item}
-                            />
-                        )}
-                    </ul>
-                </div>
-            )}
+            <div
+                key={activeTab}
+                role="tabpanel"
+                className={'section__panel'}
+                aria-hidden={activeTab === activeTab ? 'false' : 'true'}
+                id={`panel_${activeTab}`}
+                aria-labelledby={`tab_${activeTab}`}
+            >
+                <ul className="section__panel-list">
+                    {activeEvents.map((item, index) =>
+                        <Event
+                            key={index}
+                            {...item}
+                        />
+                    )}
+                </ul>
+            </div>
             {hasRightScroll &&
                 <div className="section__arrow" onClick={onArrowCLick}></div>
             }

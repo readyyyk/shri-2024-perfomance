@@ -15,6 +15,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "lightningcss": "^1.25.1",
+    "terser": "^5.31.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
@@ -25,6 +27,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "gh-pages": "^6.1.1",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-plugin-minify": "^1.5.2"
   }
 }

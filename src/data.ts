@@ -108,4 +108,5 @@ export const TABS = {
 for (let i = 0; i < 6; ++i) {
     TABS.all.items = [...TABS.all.items, ...TABS.all.items];
 }
-export const TABS_KEYS = Object.keys(TABS) as (keyof typeof TABS)[];
+export type TabKey = keyof typeof TABS;
+export const TABS_KEYS = Object.keys(TABS) as TabKey[];

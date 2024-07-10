@@ -14,11 +14,8 @@ permissions:
 
 
 jobs:
-  build:
+  bnd:
     runs-on: ubuntu-latest
-
-    environment:
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout

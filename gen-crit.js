@@ -46,7 +46,7 @@ async function generateCriticalCSS() {
     }
 
     let newHtmlContent = readFileSync(filePath, 'utf-8');
-    writeFileSync(filePath, htmlContent.replace(
+    writeFileSync(filePath, newHtmlContent.replace(
             linksWithoutBaseRegex,
             (substring, p1, p2)=>`<link rel="stylesheet" href="${CUSTOM_TO_ELIMINATE_BASE}${p1}" ${p2}>`),
         'utf-8');

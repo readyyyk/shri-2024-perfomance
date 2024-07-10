@@ -42,7 +42,7 @@ jobs:
       - name: Build my App
         run: pnpm run build
 
-      - name: Build my App
+      - name: Run PostBuild
         run: pnpm run postbuild
 
       - name: Setup Pages

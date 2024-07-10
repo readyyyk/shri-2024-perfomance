@@ -52,7 +52,8 @@ const devicesList = (activeTab) => {
 
 
 
-
+const KOSTYL = Symbol("kostyl");
+const scrolledState = {};
 const DEVICE_LIST_ROOT = document.querySelector(".section__panel-wrapper");
 
 const injectDeviceList = () => {
@@ -61,12 +62,20 @@ const injectDeviceList = () => {
     let arrow = null;
     let panel = DEVICE_LIST_ROOT.querySelector('.section__panel-list');
 
-    const onArrowCLick = () => {
+    const onArrowCLick = (kostyl) => {
         const scroller = DEVICE_LIST_ROOT.querySelector('.section__panel:not(.section__panel_hidden)');
         if (!scroller) { return; }
+        if (kostyl !== KOSTYL) {
+            scrolledState[activeTab] = scroller.scrollLeft + 400;
+            scroller.scrollTo({
+                left: scroller.scrollLeft + 400,
+                behavior: 'smooth',
+            });
+            return;
+        }
         scroller.scrollTo({
-            left: scroller.scrollLeft + 400,
-            behavior: 'smooth'
+            left: scrolledState[activeTab] ?? 0,
+            behavior: 'instant',
         });
     };
 
@@ -88,6 +97,7 @@ const injectDeviceList = () => {
             } else {
                 arrow.replaceWith(newArrow);
             }
+            onArrowCLick(KOSTYL);
             arrow = newArrow;
         } else if (arrow !== null) {
             DEVICE_LIST_ROOT.removeChild(arrow);

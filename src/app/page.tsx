@@ -1,20 +1,24 @@
-import { type FC } from 'react';
+import { type FC, lazy, Suspense } from 'react';
 
-import Header from '@/components/Header.tsx'
-import Devices from '@/components/sections/devices.tsx'
+const Header = lazy(()=>import('@/components/Header.tsx'));
+const Devices = lazy(()=>import('@/components/sections/devices.tsx'));
 import Scripts from '@/components/sections/scripts.tsx'
 import General from '@/components/sections/general.tsx'
 import Footer from '@/components/footer.tsx';
 
 const App: FC = () => {
     return (<>
-        <Header />
+        <Suspense fallback='loading...'>
+            <Header />
+        </Suspense>
         <main className="main">
             <General />
 
             <Scripts />
 
-            <Devices />
+            <Suspense fallback='loading...'>
+                <Devices />
+            </Suspense>
         </main>
         <Footer /> 
     </>);

@@ -6,11 +6,18 @@ const headerLinks = document.querySelector('.header__links');
 const injectHeader = () => {
     let open = null;
     headerMenu.onclick = () => {
+        if (open === null) {
+            headerLinks.classList.add('header__links-toggled');
+        }
         open = !open;
+
         headerMenu.setAttribute("aria-expanded", (!!open).toString());
         headerMenuText.textContent = open ? 'Закрыть меню' : 'Открыть меню';
-        const listClass = open === null ? '' : (open ? 'header__links_opened' : 'header__links-toggled');
-        headerLinks.className = "header__links "+listClass;
+        if (open) {
+            headerLinks.classList.add('header__links_opened')
+        } else {
+            headerLinks.classList.remove('header__links_opened');
+        }
     }
 }
 

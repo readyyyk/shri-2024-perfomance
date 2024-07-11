@@ -81,11 +81,12 @@ const injectDeviceList = () => {
 
     const handleTab = (newTab) => {
         for (const li of tabListSelect.children) {
-            li.setAttribute("aria-selected", String(li.dataset.tab === newTab));
-            li.setAttribute("tabindex", li.dataset.tab === newTab ? "0" : undefined);
+            li.removeAttribute("tabindex");
             li.classList.remove("section__tab_active");
+            li.setAttribute("aria-selected", String(li.dataset.tab === newTab));
             if (li.dataset.tab === newTab) {
                 li.classList.add("section__tab_active");
+                li.setAttribute("tabindex", "0");
             }
         }
 

@@ -1,0 +1,16 @@
+{
+  "name": "CUSTOM_STATIC",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "deploy": "node move.js && pnpx gh-pages -d out"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.3.2"
+  }
+}

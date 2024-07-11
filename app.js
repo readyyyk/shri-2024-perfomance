@@ -80,6 +80,15 @@ const injectDeviceList = () => {
     };
 
     const handleTab = (newTab) => {
+        for (const li of tabListSelect.children) {
+            li.setAttribute("aria-selected", String(li.dataset.tab === newTab));
+            li.setAttribute("tabindex", li.dataset.tab === newTab ? "0" : undefined);
+            li.classList.remove("section__tab_active");
+            if (li.dataset.tab === newTab) {
+                li.classList.add("section__tab_active");
+            }
+        }
+
         activeTab = newTab;
         const newPanel = devicesList(newTab);
         panel.replaceWith(newPanel);
@@ -117,14 +126,6 @@ const injectDeviceList = () => {
     for(const li of tabListSelect.children) {
         li.onclick = (e) => {
             const newTab = li.dataset.tab;
-
-            for (const inactive of tabListSelect.children) {
-                inactive.setAttribute("aria-selected", String(inactive.dataset.tab === newTab));
-                inactive.setAttribute("tabindex", inactive.dataset.tab === newTab ? "0" : undefined);
-                inactive.classList.remove("section__tab_active");
-            }
-            li.classList.add("section__tab_active");
-
             handleTab(newTab);
         }
     }

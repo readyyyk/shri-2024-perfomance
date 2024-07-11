@@ -1,8 +1,6 @@
 'use client';
 
-import React, { memo } from 'react';
-
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo } from 'react';
 
 
 const List = memo(() => <>
